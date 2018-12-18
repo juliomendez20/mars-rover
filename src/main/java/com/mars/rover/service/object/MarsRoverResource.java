@@ -3,6 +3,8 @@ package com.mars.rover.service.object;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mars.rover.exceptions.GridAlreadyCreatedException;
 import com.mars.rover.exceptions.GridNotYetCreatedException;
 import com.mars.rover.exceptions.ObstacleFoundException;
+import com.mars.rover.exceptions.RoverAlreadyCreatedException;
 import com.mars.rover.exceptions.RoverAtPositionException;
 import com.mars.rover.exceptions.RoverInvalidMoveException;
 import com.mars.rover.exceptions.RoverNotFoundException;
@@ -59,7 +62,7 @@ public class MarsRoverResource {
 
 	
 	@PostMapping(path="/mars-rover/grid")
-	public ResponseEntity<Object> createGrid(@RequestBody Grid gridParam){
+	public ResponseEntity<Object> createGrid(@Valid @RequestBody Grid gridParam){
 		
 		Grid grid = roverDaoService.getGrid();
 		
@@ -87,6 +90,9 @@ public class MarsRoverResource {
 		
 		roverDaoService.createRover(rover);
 		
+		if(null == roverDaoService.getRover()) {
+			throw new RoverAlreadyCreatedException("Rover has been alreade created. "+ roverDaoService.getRover());
+		}
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().build()
 				.toUri();
 		

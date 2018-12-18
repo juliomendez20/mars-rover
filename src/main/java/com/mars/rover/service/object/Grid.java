@@ -3,14 +3,17 @@ package com.mars.rover.service.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Min;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mars.rover.exceptions.InvalidPositionException;
 import com.mars.rover.exceptions.ObstacleFoundException;
 
 public class Grid {
 
-	
+	@Min(value=2,message="Grid axis must be at least 2")
 	private int xHorizontalMax;
+	@Min(value=2,message="Grid axis must be at least 2")
 	private int yVerticalMax;
 	@JsonIgnore
 	List<Obstacle> obstacles = new ArrayList<Obstacle>();
