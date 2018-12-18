@@ -1,5 +1,13 @@
 # Mars rover
 
+##Mars Rover Implementation
+
+This my approach to solve the mars Rover Api problem. As I did not know how did you would like to interact with the software, I have created 2 different approaches.
+
+- The entry point is MarsRover and it uses the Scanner for the console to request for the input data, similar to the sample you have sent. I have added validation to the inputs so we end up with a valid grid, a set of valid obstacles and a valid initial position for the rover. 
+
+- The entry point is MarsRoverService, it is a simple SpringBoot application that enable the interaction with the rover via http, I have added the swagger configuration to produce certain documentation on the use of it, generated several exceptions and exception handlers for those.
+
 ##Description
 
 Develop an api that moves a rover around on a grid.
