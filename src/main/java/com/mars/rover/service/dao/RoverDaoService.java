@@ -17,7 +17,7 @@ public class RoverDaoService {
 
 	private static Rover rover;
 	private static Grid grid;
-	static {
+	/*static {
 		grid = new Grid(5,5);
 		
 		try {
@@ -34,10 +34,14 @@ public class RoverDaoService {
 		}
 		
 		
-	}
+	}*/
 	
 	public List<Obstacle> findAllObstacles(){
 		return grid.getObstacles();
+	}
+	
+	public void addObstacle(Obstacle obstacle) throws InvalidPositionException, ObstacleFoundException{
+		grid.addObstacle(obstacle);
 	}
 	
 	public Rover getRover() {
@@ -50,9 +54,10 @@ public class RoverDaoService {
 
 	public void createGrid(Grid gridParam) {
 		grid = gridParam;
+		grid.initializedGridObstacle();
 	}
 	
-	public void createRover(Rover rover) throws ObstacleFoundException, InvalidPositionException {
-		rover = new Rover(rover.getDirection(), rover.getCurrentPosition(), getGrid());
+	public void createRover(Rover roverParam) throws ObstacleFoundException, InvalidPositionException {
+		rover = new Rover(roverParam.getDirection(), roverParam.getCurrentPosition(), grid);
 	}
 }

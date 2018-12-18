@@ -23,7 +23,15 @@ public class Grid {
 		this.gridObstacle = new Obstacle[x][y];
 	}
 	
-	public Grid() {};
+	public Grid() {
+		this.gridObstacle = new Obstacle[xHorizontalMax][yVerticalMax];
+	};
+	
+	public void initializedGridObstacle() {
+		if(gridObstacle.length == 0) {
+			gridObstacle = new Obstacle[xHorizontalMax][yVerticalMax];
+		}
+	}
 	
 	public Position getWrappedPosition(Position position) throws ObstacleFoundException, InvalidPositionException{
 		Position wrappedPosition = new Position(getWrapHorizontal(position.getxHorizontal()),

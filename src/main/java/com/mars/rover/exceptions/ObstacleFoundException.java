@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.mars.rover.service.object.Obstacle;
 
-@ResponseStatus(HttpStatus.ACCEPTED)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class ObstacleFoundException extends RuntimeException {
 
 	/**
