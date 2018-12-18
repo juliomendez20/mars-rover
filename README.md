@@ -10,7 +10,7 @@ This my approach to solve the mars Rover Api problem. As I did not know how did 
 
 ##Problems I ran into. 
 
-Understanding the wrapping concept. I was confuse by the phrase (planets are spheres after all). I have developed the wrapping functionality for a 2D grid.
+Understanding the wrapping concept. I was confuse by the phrase (planets are spheres after all) I understand wrapping as Pac-man game, when I out of the screen I go to other edge and that is how I have implemented. 
 
 ##Things that can be improved
 
