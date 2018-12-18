@@ -19,6 +19,8 @@ public class Rover {
 		grid.isValidPosition(currentPosition);
 	}
 	
+	public Rover() {}
+	
 	public Direction getDirection() {
 		return direction;
 	}

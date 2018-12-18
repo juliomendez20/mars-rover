@@ -3,6 +3,7 @@ package com.mars.rover.service.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mars.rover.exceptions.InvalidPositionException;
 import com.mars.rover.exceptions.ObstacleFoundException;
 
@@ -11,7 +12,9 @@ public class Grid {
 	
 	private int xHorizontalMax;
 	private int yVerticalMax;
+	@JsonIgnore
 	List<Obstacle> obstacles = new ArrayList<Obstacle>();
+	@JsonIgnore
 	private Obstacle[][] gridObstacle;
 	
 	public Grid(int x, int y){

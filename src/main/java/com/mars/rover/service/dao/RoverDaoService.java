@@ -23,7 +23,7 @@ public class RoverDaoService {
 		try {
 			grid.addObstacle(new Obstacle(new Position(3,3)));
 			grid.addObstacle(new Obstacle(new Position(3,4)));
-			rover = new Rover(Direction.N, new Position(0, 0), grid);
+			//rover = new Rover(Direction.N, new Position(0, 0), grid);
 			
 		} catch (ObstacleFoundException e) {
 			// TODO Auto-generated catch block
@@ -52,4 +52,7 @@ public class RoverDaoService {
 		grid = gridParam;
 	}
 	
+	public void createRover(Rover rover) throws ObstacleFoundException, InvalidPositionException {
+		rover = new Rover(rover.getDirection(), rover.getCurrentPosition(), getGrid());
+	}
 }
