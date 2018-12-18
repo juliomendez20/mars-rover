@@ -10,6 +10,10 @@ import com.mars.rover.service.object.Obstacle;
 import com.mars.rover.service.object.Position;
 import com.mars.rover.service.object.Rover;
 
+import static com.mars.rover.service.util.ScannerUtil.getInteger;
+import static com.mars.rover.service.util.ScannerUtil.getValidStringEntry;
+
+
 public class MarsRover {
 
     public static void main(String[] args) {
@@ -74,53 +78,6 @@ public class MarsRover {
     		}
             System.out.println(rover.toString());
         }while(true);
-
-    }
-    
-    //Read and Validate entries for integers greated than base Int
-    public static int getInteger(Scanner reader, int baseInt, String valueDescription) {
-    
-    	int result;
-    	boolean entryIsIncorrect = true;
-    	
-	    do{
-	    	System.out.println(valueDescription);
-	    	while(!reader.hasNextInt()) {
-	    		System.out.println("Not an Integer!!!");
-	    		reader.next();
-	    	}
-	    
-	    	result = reader.nextInt();
-	    	entryIsIncorrect = result<=baseInt;
-	    	
-	    	if(entryIsIncorrect)
-	    		System.out.println("Please an Integer greater or equal to " + baseInt);
-	    	
-	    }while(entryIsIncorrect);
-	    
-	    return result;
-
-    }
-    
-    public static String getValidStringEntry(Scanner reader, String regex, String valueDescription, String invalidDescriptio) {
-        
-    	String result;
-    	boolean entryIsIncorrect = true;
-    	
-	    do{
-	    	System.out.println(valueDescription);
-	    	while(!reader.hasNext(regex)) {
-	    		System.out.println(invalidDescriptio);
-	    		System.out.println(valueDescription);
-	    		reader.next();
-	    	}
-	    
-	    	result = reader.next();
-	    	entryIsIncorrect = false;
-	    	
-	    }while(entryIsIncorrect);
-	    
-	    return result;
 
     }
     
