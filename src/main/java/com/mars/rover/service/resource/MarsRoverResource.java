@@ -1,4 +1,4 @@
-package com.mars.rover.service.object;
+package com.mars.rover.service.resource;
 
 import java.net.URI;
 import java.util.List;
@@ -23,6 +23,9 @@ import com.mars.rover.exceptions.RoverAtPositionException;
 import com.mars.rover.exceptions.RoverInvalidMoveException;
 import com.mars.rover.exceptions.RoverNotFoundException;
 import com.mars.rover.service.dao.RoverDaoService;
+import com.mars.rover.service.object.Grid;
+import com.mars.rover.service.object.Obstacle;
+import com.mars.rover.service.object.Rover;
 
 @RestController
 public class MarsRoverResource {
