@@ -1,15 +1,19 @@
 package com.mars.rover.service.object;
 
-public class Position {
+import javax.validation.constraints.Min;
 
+public class Position {
+	
+	@Min(value=0,message="Position xHorizontal should be greater than 0")
 	private int xHorizontal;
+	
+	@Min(value=0,message="Position yHorizontal should be greater than 0")
 	private int yVertical;
 	
 	protected Position() {
 	}
 	
 	public Position(int xHorizontal,int yVertical) {
-		super();
 		this.xHorizontal = xHorizontal;
 		this.yVertical = yVertical;
 	}
@@ -30,6 +34,7 @@ public class Position {
 		this.yVertical = yVertical;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("(")
@@ -51,7 +56,6 @@ public class Position {
 
 	@Override
 	public boolean equals(Object obj) {
-		System.out.println("HERE " + obj);
 		if (this == obj)
 			return true;
 		if (obj == null)

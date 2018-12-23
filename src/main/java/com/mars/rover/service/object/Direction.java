@@ -15,7 +15,6 @@ public enum Direction {
 		this.rotation = rotation;
 		this.xHorizontal = xHorizontal;
 		this.yVertical = yVertical;
-		
 	}
 	
 	public Direction rotateRight(){

@@ -27,8 +27,7 @@ public class Grid {
 	}
 	
 	public Grid() {
-		this.gridObstacle = new Obstacle[xHorizontalMax][yVerticalMax];
-	};
+	}
 	
 	public void initializedGridObstacle() {
 		if(gridObstacle.length == 0) {

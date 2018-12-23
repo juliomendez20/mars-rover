@@ -3,6 +3,7 @@ package com.mars.rover.service.object;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mars.rover.exceptions.InvalidPositionException;
 import com.mars.rover.exceptions.ObstacleFoundException;
+import com.mars.rover.exceptions.RoverInvalidMoveException;
 
 public class Rover {
 
@@ -76,7 +77,7 @@ public class Rover {
 		return grid.getWrappedPosition(previousPosition);
 	}
 	//TO Execute the actions sequencially 
-	public void move(String actions) throws InvalidPositionException, ObstacleFoundException,Exception{
+	public void move(String actions) throws InvalidPositionException, ObstacleFoundException,RoverInvalidMoveException{
 		
 		char[] actionsArray = actions.toCharArray();
 		
@@ -95,7 +96,7 @@ public class Rover {
 				rotateRight();
 				break;
 			default:
-				throw new Exception("Action not recognized. Command = "+actionsArray[i]);
+				throw new RoverInvalidMoveException("Move not recognized. Command = "+actionsArray[i]);
 			}
 		}
 	}

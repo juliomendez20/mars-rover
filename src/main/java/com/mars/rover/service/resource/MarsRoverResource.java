@@ -17,10 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mars.rover.exceptions.GridAlreadyCreatedException;
 import com.mars.rover.exceptions.GridNotYetCreatedException;
-import com.mars.rover.exceptions.ObstacleFoundException;
 import com.mars.rover.exceptions.RoverAlreadyCreatedException;
 import com.mars.rover.exceptions.RoverAtPositionException;
-import com.mars.rover.exceptions.RoverInvalidMoveException;
 import com.mars.rover.exceptions.RoverNotFoundException;
 import com.mars.rover.service.dao.RoverDaoService;
 import com.mars.rover.service.object.Grid;
@@ -50,14 +48,8 @@ public class MarsRoverResource {
 		Rover rover = roverDaoService.getRover();
 		if(null == rover)
 			throw new RoverNotFoundException("Rover has not been created.");
-		try {
-			rover.move(command);
-		}catch(ObstacleFoundException e) {
-			throw e;
-		}catch (Exception e) {
-			
-			throw new RoverInvalidMoveException("Rover Invalid Move Exception");
-		}
+		
+		rover.move(command);
 		
 		Resource<Rover> resource = new Resource<Rover>(rover);
 		return resource;
@@ -91,11 +83,12 @@ public class MarsRoverResource {
 			throw new GridNotYetCreatedException("Cannot create rover. Grid has not been created.");
 		}
 		
-		roverDaoService.createRover(rover);
-		
-		if(null == roverDaoService.getRover()) {
+		if(null != roverDaoService.getRover()) {
 			throw new RoverAlreadyCreatedException("Rover has been alreade created. "+ roverDaoService.getRover());
 		}
+		
+		roverDaoService.createRover(rover);
+		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().build()
 				.toUri();
 		

@@ -8,7 +8,6 @@ public class Obstacle {
 	}
 	
 	public Obstacle(Position position) {
-		super();
 		this.position = position;
 	}
 
@@ -18,8 +17,6 @@ public class Obstacle {
 
 	public void setPosition(Position position) {
 		this.position = position;
-	}
-	
-	
+	}	
 	
 }
