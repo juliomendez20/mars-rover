@@ -52,7 +52,7 @@ public class MarsRoverResourceTest {
 	
 	
 	@Test
-	public void createGridTestSuccess() throws Exception {
+	public void createGridTest_Success() throws Exception {
 		
 		when(roverServiceDao.getGrid()).thenReturn(null);
 		
@@ -80,7 +80,7 @@ public class MarsRoverResourceTest {
 	}
 	
 	@Test
-	public void addObstacleTestSuccess() throws Exception {
+	public void addObstacleTest_Success() throws Exception {
 		
 		when(roverServiceDao.getGrid()).thenReturn(grid);
 		
@@ -121,11 +121,11 @@ public class MarsRoverResourceTest {
 	      .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
 	   
 	   int status = mvcResult.getResponse().getStatus();
-	   assertEquals(404, status);
+	   assertEquals(406, status);
 	}
 	
 	@Test
-	public void createRoverTestSuccess() throws Exception {
+	public void createRoverTest_Success() throws Exception {
 		
 		when(roverServiceDao.getGrid()).thenReturn(grid);
 		when(roverServiceDao.getRover()).thenReturn(null);
@@ -140,6 +140,77 @@ public class MarsRoverResourceTest {
 		
 	}
 	
+	@Test
+	public void createRoverTest_RoverAlreadyCreatedException() throws Exception {
+		
+		when(roverServiceDao.getGrid()).thenReturn(grid);
+		when(roverServiceDao.getRover()).thenReturn(rover);
+		
+	   String uri = "/mars-rover/rover";
+	   String inputJson = mapToJson(rover);
+	   MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)
+	      .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+	   
+	   int status = mvcResult.getResponse().getStatus();
+	   assertEquals(406, status);
+		
+	}
+	
+	@Test
+	public void moveRoverTest_Success() throws Exception {
+		
+		when(roverServiceDao.getGrid()).thenReturn(grid);
+		when(roverServiceDao.getRover()).thenReturn(rover);
+		
+	   String uri = "/mars-rover/rover/move/ffblr";
+	   MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)).andReturn();
+	   
+	   int status = mvcResult.getResponse().getStatus();
+	   assertEquals(200, status);
+		
+	}
+	
+	@Test
+	public void moveRoverTest_RoverInvalidMoveException() throws Exception {
+		
+		when(roverServiceDao.getGrid()).thenReturn(grid);
+		when(roverServiceDao.getRover()).thenReturn(rover);
+		
+	   String uri = "/mars-rover/rover/move/xfblr";
+	   MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri)).andReturn();
+	   
+	   int status = mvcResult.getResponse().getStatus();
+	   assertEquals(406, status);
+		
+	}
+	
+	@Test
+	public void getRoverPositionTest_Success() throws Exception {
+		
+		when(roverServiceDao.getGrid()).thenReturn(grid);
+		when(roverServiceDao.getRover()).thenReturn(rover);
+		
+	   String uri = "/mars-rover/rover";
+	   MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+	   
+	   int status = mvcResult.getResponse().getStatus();
+	   assertEquals(200, status);
+		
+	}
+	
+	@Test
+	public void getRoverPositionTest_RoverNotYetCreatedException() throws Exception {
+		
+		when(roverServiceDao.getGrid()).thenReturn(grid);
+		when(roverServiceDao.getRover()).thenReturn(null);
+		
+	   String uri = "/mars-rover/rover";
+	   MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+	   
+	   int status = mvcResult.getResponse().getStatus();
+	   assertEquals(404, status);
+		
+	}
 	
 	protected String mapToJson(Object obj) throws JsonProcessingException {
 	      ObjectMapper objectMapper = new ObjectMapper();
